@@ -328,8 +328,8 @@ unspecified,
 
 failure(
 22,
-"fatal error: concurrent map iteration and map write",
 "module.chef_load.null_resource.chef_load (remote-exec): INFO[0013] API Request                                   method=POST node_name=chef-node-97 request_time_seconds=0 status_code=404 url=\"https://10.0.5.102/organizations/4thcoffee/data-collector\"\nmodule.chef_load.null_resource.chef_load (remote-exec): INFO[0013] API Request                                   method=POST node_name=\"node::update\" request_time_seconds=0 status_code=404 url=\"https://10.0.5.102/organizations/4thcoffee/data-collector\"\nmodule.chef_load.null_resource.chef_load (remote-exec): INFO[0013] Printing profile of API requests\nmodule.chef_load.null_resource.chef_load (remote-exec): fatal error: concurrent map iteration and map write\n \nmodule.chef_load.null_resource.chef_load (remote-exec): goroutine 1 [running]:\nmodule.chef_load.null_resource.chef_load (remote-exec): runtime.throw(0x933a8d, 0x26)\nmodule.chef_load.null_resource.chef_load (remote-exec): \t/hab/pkgs/core/go/1.12/20190226224017/src/runtime/panic.go:617 +0x72 fp=0xc0001c7830 sp=0xc0001c7800 pc=0x42d272\nmodule.chef_load.null_resource.chef_load (remote-exec): runtime.mapiternext(0xc0001c7b08)\nmodule.chef_load.null_resource.chef_load (remote-exec): \t/hab/pkgs/core/go/1.12/20190226224017/src/runtime/map.go:860 +0x520 fp=0xc0001c78b8 sp=0xc0001c7830 pc=0x410220\n\n<snip>\n\n╷\n│ Error: remote-exec provisioner error\n│\n│   with module.chef_load.null_resource.chef_load,\n│   on ../../../../modules/chef_load/main.tf line 24, in resource \"null_resource\" \"chef_load\":\n│   24:   provisioner \"remote-exec\" {\n│\n│ error executing \"/tmp/terraform_1269976694.sh\": Process exited with status 2\n╵\n \n  END SCENARIO\n \n      Workspace: 111-external-postgresql-ipv4-amazon-2\n      Scenario: external-postgresql\n        Status: FAIL",
+_Context,
 unspecified,
 unspecified,
 [],
@@ -345,9 +345,9 @@ _Context,
 unspecified,
 unspecified,
 [],
-["12.17.15 -> 14.13.7+20220211145353"],
-["https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069"],
-["chef-backend-ipv4-rhel-8"]
+["12.17.15 -> 14.12.21", "12.17.15 -> 14.13.7+20220211145353"],
+["https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1023", "https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069"],
+["chef-backend-ipv4-rhel-8", "chef-backend-ipv4-ubuntu-18.04"]
 ).
 
 failure(
@@ -396,6 +396,18 @@ unspecified,
 ["12.17.15 -> 14.13.7+20220211145353"],
 ["https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069#b864b174-e175-4499-9b3b-a6b9f5043768"],
 ["azure-postgresql-rhel-8"]
+).
+
+failure(
+7,
+"module.chef_load.null_resource.chef_load (remote-exec): ★ Install of chef/chef-load/4.0.0/20190306204146 complete with 3 new packages installed.\nmodule.chef_load.null_resource.chef_load (remote-exec): » Binlinking chef-load from chef/chef-load/4.0.0/20190306204146 into /bin\nmodule.chef_load.null_resource.chef_load (remote-exec): ★ Binlinked chef-load from chef/chef-load/4.0.0/20190306204146 to /bin/chef-load\n \nmodule.chef_load.null_resource.chef_load (remote-exec): BEGIN NODE GENERATION\n \nmodule.chef_load.null_resource.chef_load (remote-exec): ERRO[0000] Could not read private key %s/home/ec2-user/janedoe.pem  error=\"open /home/ec2-user/janedoe.pem: no such file or directory\"\nmodule.chef_load.null_resource.chef_load (remote-exec): ERRO[0000] Could not create API client                   error=\"private key block size invalid\"\nmodule.chef_load.null_resource.chef_load (remote-exec): panic: runtime error: invalid memory address or nil pointer dereference\nmodule.chef_load.null_resource.chef_load (remote-exec): [signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x71fa8d]\n \nmodule.chef_load.null_resource.chef_load (remote-exec): goroutine 24 [running]:\nmodule.chef_load.null_resource.chef_load (remote-exec): github.com/chef/chef-load/lib.getAPIClient(0xc00009a8a0, 0x7, 0xc0000ae600, 0x1a, 0xc0000aa420, 0x2c, 0x0, 0x0, 0x0, 0x0, ...)\nmodule.chef_load.null_resource.chef_load (remote-exec): \t/hab/cache/src/scaffolding-go-gopath/src/github.com/chef/chef-load/lib/util.go:97 +0x1ad\nmodule.chef_load.null_resource.chef_load (remote-exec): github.com/chef/chef-load/lib.GenerateCCRs(0xc000094c60, 0xc000078300, 0xc00009afd0, 0x0)\nmodule.chef_load.null_resource.chef_load (remote-exec): \t/hab/cache/src/scaffolding-go-gopath/src/github.com/chef/chef-load/lib/generator.go:111 +0x142d\nmodule.chef_load.null_resource.chef_load (remote-exec): github.com/chef/chef-load/lib.GenerateData.func4(0xc00009afd0, 0xc000094c60, 0xc000078300)\nmodule.chef_load.null_resource.chef_load (remote-exec): \t/hab/cache/src/scaffolding-go-gopath/src/github.com/chef/chef-load/lib/generator.go:67 +0x5b\nmodule.chef_load.null_resource.chef_load (remote-exec): created by github.com/chef/chef-load/lib.GenerateData\nmodule.chef_load.null_resource.chef_load (remote-exec): \t/hab/cache/src/scaffolding-go-gopath/src/github.com/chef/chef-load/lib/generator.go:65 +0x170\n╷\n│ Error: remote-exec provisioner error\n│\n│   with module.chef_load.null_resource.chef_load,\n│   on ../../../../modules/chef_load/main.tf line 24, in resource \"null_resource\" \"chef_load\":\n│   24:   provisioner \"remote-exec\" {\n│\n│ error executing \"/tmp/terraform_1671389574.sh\": Process exited with status 2\n╵\n \n  END SCENARIO\n \n      Workspace: 111-external-postgresql-ipv4-amazon-2\n      Scenario: external-postgresql\n        Status: FAIL",
+_Context,
+unspecified,
+unspecified,
+[],
+["14.12.21 -> 14.13.7+20220211145353"],
+["https://buildkite.com/chef/chef-umbrella-main-chef-server-full/builds/111#01d73ed4-36db-4a8a-8e58-7e1e70678f19"],
+["external-postgresql-ipv4-amazon-2"]
 ).
 
 % ------------------------------------------------------------------------------
