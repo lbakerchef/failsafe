@@ -30,6 +30,7 @@ no,
 ],
 [
 "external-postgres-ipv6-amazon-2",
+"external-postgres-ipv4-ubuntu-18.04",
 "external-postgres-ipv4-amazon-2",
 "fips-ipv4-rhel-7",
 "mtls-ipv4-ubuntu-18.04",
@@ -358,7 +359,7 @@ unspecified,
 [],
 ["12.17.15 -> 14.13.7+20220211145353"],
 ["https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069"],
-["external-openldap-ipv4-rhel-8", "external-postgresql-ipv4-ubuntu-18.04"]
+["external-openldap-ipv4-rhel-8"]
 ).
 
 failure(
