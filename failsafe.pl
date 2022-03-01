@@ -15,13 +15,14 @@ failure(
 0,
 "null_resource.chef_server_config (remote-exec): BEGIN INSTALL CHEF SERVER \nnull_resource.chef_server_config (remote-exec): sudo chown root:root /tmp/hosts \nnull_resource.chef_server_config (remote-exec): + sudo chown root:root /tmp/hosts \nnull_resource.chef_server_config (remote-exec): sudo mv /tmp/hosts /etc/hosts \nnull_resource.chef_server_config (remote-exec): + sudo mv /tmp/hosts /etc/hosts \nnull_resource.chef_server_config (remote-exec): curl -vo /tmp/ \nnull_resource.chef_server_config (remote-exec): + curl -vo /tmp/ \nnull_resource.chef_server_config (remote-exec): curl: no URL specified!",
 _Context,
-"we don't have the amazon builds for 12.17 and 13.2 (well, now it's occurring on non-amazon).",
+"we don't have the amazon builds for 12.17 and 13.2 (well, now it's occurring on non-amazon).  or package does not exist.",
 no,
-["14.6.32"],
+["14.6.32", "14.13.42"],
 [
 "12.17.15 -> 14.6.32",
 "12.17.15 -> 14.13.7+20220211145353",
-"13.2 -> 14.6.32"
+"13.2 -> 14.6.32",
+"13.2.0 -> 14.13.42"
 ],
 [
 "https://buildkite.com/chef/chef-umbrella-master-chef-server-full/builds/44",
@@ -37,17 +38,17 @@ no,
 "standalone-fresh-install-ipv4-ubuntu-16.04",
 "standalone-fresh-install-ipv4-ubuntu-18.04",
 "standalone-upgrade-ipv4-amazon-2",
-"standalone-upgrade-ipv4-ubuntu-20.04-from-12.17.15",
-"standalone-upgrade-ipv6-ubuntu-18.04",
 "standalone-upgrade-ipv4-rhel-7",
+"standalone-upgrade-ipv4-ubuntu-20.04-from-12.17.15",
 "standalone-upgrade-ipv6-amazon-2",
+"standalone-upgrade-ipv6-ubuntu-18.04",
 "tiered-fresh-install-ipv4-ubuntu-18.04",
 "tiered-fresh-install-ipv6-ubuntu-18.04",
-"tiered-upgrade-ipv6-amazon-2",
 "tiered-upgrade-ipv4-amazon-2",
 "tiered-upgrade-ipv4-rhel-7",
-"tiered-upgrade-ipv6-rhel-7",
-"tiered-upgrade-ipv4-ubuntu-18.04"
+"tiered-upgrade-ipv4-ubuntu-18.04",
+"tiered-upgrade-ipv6-amazon-2",
+"tiered-upgrade-ipv6-rhel-7"
 ]
 ).
 
@@ -89,8 +90,8 @@ failure(
 _Context,
 "Setup issue.",
 "Should not be - passes on Ubuntu 20.",
-["14.5.29"],
-["14.4.4 -> 14.5.27"],
+["14.5.29", "14.13.42"],
+["12.17.15 -> 14.13.42", "14.4.4 -> 14.5.27"],
 ["https://buildkite.com/chef/chef-umbrella-master-chef-server-full/builds/39"],
 ["mtls-ipv4-rhel-7"]
 ).
@@ -101,8 +102,8 @@ failure(
 _Context,
 "Merged some additional changes in umbrella. Respective chef-server changes need to be merged.: https://github.com/chef/umbrella/pull/121",
 no,
-["14.5.29"],
-["14.4.4 -> 14.5.27"],
+["14.5.29", "14.13.42"],
+["14.4.4 -> 14.5.27", "13.2.0 -> 14.13.42"],
 ["https://buildkite.com/chef/chef-umbrella-master-chef-server-full/builds/39"],
 ["standalone-upgrade-13es-ipv4-rhel-7"]
 ).
@@ -174,13 +175,14 @@ failure(
 11,
 "null_resource.chef_server_config (remote-exec):     ================================================================================\nnull_resource.chef_server_config (remote-exec):     Error executing action `create` on resource \'elasticsearch_index[chef]\'\nnull_resource.chef_server_config (remote-exec):     ================================================================================\n \nnull_resource.chef_server_config (remote-exec):     Net::HTTPServerException\nnull_resource.chef_server_config (remote-exec):     ------------------------\nnull_resource.chef_server_config (remote-exec):     406 \"Not Acceptable\"\n \nnull_resource.chef_server_config (remote-exec):     Cookbook Trace:\nnull_resource.chef_server_config (remote-exec):     ---------------\nnull_resource.chef_server_config (remote-exec):     /var/opt/opscode/local-mode-cache/cookbooks/private-chef/libraries/elasticsearch_index_provider.rb:11:in `block (2 levels) in <class:ElasticSearchIndex>\'\nnull_resource.chef_server_config (remote-exec):     /var/opt/opscode/local-mode-cache/cookbooks/private-chef/libraries/elasticsearch_index_provider.rb:10:in `block in <class:ElasticSearchIndex>\'\n \nnull_resource.chef_server_config (remote-exec):     Resource Declaration:\nnull_resource.chef_server_config (remote-exec):     ---------------------\nnull_resource.chef_server_config (remote-exec):     # In /var/opt/opscode/local-mode-cache/cookbooks/private-chef/recipes/opscode-solr4-external.rb\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):      23:   elasticsearch_index \"chef\" do\nnull_resource.chef_server_config (remote-exec):      24:     server_url node[\'private_chef\'][\'opscode-solr4\'][\'external_url\']\nnull_resource.chef_server_config (remote-exec):      25:     index_definition({\"settings\" => {\nnull_resource.chef_server_config (remote-exec):      26:                         \"analysis\" => {\nnull_resource.chef_server_config (remote-exec):      27:                           \"analyzer\" => {\nnull_resource.chef_server_config (remote-exec):      28:                             \"default\" => {\nnull_resource.chef_server_config (remote-exec):      29:                               \"type\" => \"whitespace\"\nnull_resource.chef_server_config (remote-exec):      30:                             }\nnull_resource.chef_server_config (remote-exec):      31:                           }\nnull_resource.chef_server_config (remote-exec):      32:                         },\nnull_resource.chef_server_config (remote-exec):      33:                         \"number_of_shards\" => node[\'private_chef\'][\'opscode-solr4\'][\'elasticsearch_shard_count\'],\nnull_resource.chef_server_config (remote-exec):      34:                         \"number_of_replicas\" => node[\'private_chef\'][\'opscode-solr4\'][\'elasticsearch_replica_count\']\nnull_resource.chef_server_config (remote-exec):      35:                       },\nnull_resource.chef_server_config (remote-exec):      36:                       \"mappings\" => {\nnull_resource.chef_server_config (remote-exec):      37:                         \"object\" => {\nnull_resource.chef_server_config (remote-exec):      38:                           \"_source\" => { \"enabled\" => false },\nnull_resource.chef_server_config (remote-exec):      39:                           \"_all\" => { \"enabled\" => false },\nnull_resource.chef_server_config (remote-exec):      40:                           \"properties\" => {\nnull_resource.chef_server_config (remote-exec):      41:                             \"X_CHEF_database_CHEF_X\" => { \"type\" => \"string\",\nnull_resource.chef_server_config (remote-exec):      42:                                                           \"index\" => \"not_analyzed\",\nnull_resource.chef_server_config (remote-exec):      43:                                                           \"norms\" => {\nnull_resource.chef_server_config (remote-exec):      44:                                                             \"enabled\" => false\nnull_resource.chef_server_config (remote-exec):      45:                                                           }\nnull_resource.chef_server_config (remote-exec):      46:                                                         },\nnull_resource.chef_server_config (remote-exec):      47:                             \"X_CHEF_type_CHEF_X\" => { \"type\" => \"string\",\nnull_resource.chef_server_config (remote-exec):      48:                                                       \"index\" => \"not_analyzed\",\nnull_resource.chef_server_config (remote-exec):      49:                                                       \"norms\" => {\nnull_resource.chef_server_config (remote-exec):      50:                                                         \"enabled\" => false\nnull_resource.chef_server_config (remote-exec):      51:                                                       }\nnull_resource.chef_server_config (remote-exec):      52:                                                     },\nnull_resource.chef_server_config (remote-exec):      53:                             \"X_CHEF_id_CHEF_X\" => { \"type\" => \"string\",\nnull_resource.chef_server_config (remote-exec):      54:                                                     \"index\" => \"not_analyzed\",\nnull_resource.chef_server_config (remote-exec):      55:                                                     \"norms\" => {\nnull_resource.chef_server_config (remote-exec):      56:                                                       \"enabled\" => false\nnull_resource.chef_server_config (remote-exec):      57:                                                     }\nnull_resource.chef_server_config (remote-exec):      58:                                                   },\nnull_resource.chef_server_config (remote-exec):      59:                             \"data_bag\" => { \"type\" => \"string\",\nnull_resource.chef_server_config (remote-exec):      60:                                             \"index\" => \"not_analyzed\",\nnull_resource.chef_server_config (remote-exec):      61:                                             \"norms\" => {\nnull_resource.chef_server_config (remote-exec):      62:                                               \"enabled\" => false\nnull_resource.chef_server_config (remote-exec):      63:                                             }\nnull_resource.chef_server_config (remote-exec):      64:                                           },\nnull_resource.chef_server_config (remote-exec):      65:                             \"content\" => { \"type\" => \"string\", \"index\" => \"analyzed\"}\nnull_resource.chef_server_config (remote-exec):      66:                           }\nnull_resource.chef_server_config (remote-exec):      67:                         }\nnull_resource.chef_server_config (remote-exec):      68:                       }\nnull_resource.chef_server_config (remote-exec):      69:                      })\nnull_resource.chef_server_config (remote-exec):      70:   end\nnull_resource.chef_server_config (remote-exec):      71: end\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):     Compiled Resource:\nnull_resource.chef_server_config (remote-exec):     ------------------\nnull_resource.chef_server_config (remote-exec):     # Declared in /var/opt/opscode/local-mode-cache/cookbooks/private-chef/recipes/opscode-solr4-external.rb:23:in `from_file\'\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):     elasticsearch_index(\"chef\") do\nnull_resource.chef_server_config (remote-exec):       action [:create]\nnull_resource.chef_server_config (remote-exec):       retries 0\nnull_resource.chef_server_config (remote-exec):       retry_delay 2\nnull_resource.chef_server_config (remote-exec):       default_guard_interpreter :default\nnull_resource.chef_server_config (remote-exec):       declared_type :elasticsearch_index\nnull_resource.chef_server_config (remote-exec):       cookbook_name \"private-chef\"\nnull_resource.chef_server_config (remote-exec):       recipe_name \"opscode-solr4-external\"\nnull_resource.chef_server_config (remote-exec):       server_url \"http://elasticsearch.internal:9200\"\nnull_resource.chef_server_config (remote-exec):       index_definition {\"settings\"=>{\"analysis\"=>{\"analyzer\"=>{\"default\"=>{\"type\"=>\"whitespace\"}}}, \"number_of_shards\"=>5, \"number_of_replicas\"=>1}, \"mappings\"=>{\"object\"=>{\"_source\"=>{\"enabled\"=>false}, \"_all\"=>{\"enabled\"=>false}, \"properties\"=>{\"X_CHEF_database_CHEF_X\"=>{\"type\"=>\"string\", \"index\"=>\"not_analyzed\", \"norms\"=>{\"enabled\"=>false}}, \"X_CHEF_type_CHEF_X\"=>{\"type\"=>\"string\", \"index\"=>\"not_analyzed\", \"norms\"=>{\"enabled\"=>false}}, \"X_CHEF_id_CHEF_X\"=>{\"type\"=>\"string\", \"index\"=>\"not_analyzed\", \"norms\"=>{\"enabled\"=>false}}, \"data_bag\"=>{\"type\"=>\"string\", \"index\"=>\"not_analyzed\", \"norms\"=>{\"enabled\"=>false}}, \"content\"=>{\"type\"=>\"string\", \"index\"=>\"analyzed\"}}}}}\nnull_resource.chef_server_config (remote-exec):       index_name \"chef\"\nnull_resource.chef_server_config (remote-exec):     end\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):     Platform:\nnull_resource.chef_server_config (remote-exec):     ---------\nnull_resource.chef_server_config (remote-exec):     x86_64-linux\n \nnull_resource.chef_server_config (remote-exec): Recipe: private-chef::postgresql\nnull_resource.chef_server_config (remote-exec):   * runit_service[postgresql] action restart\nnull_resource.chef_server_config (remote-exec):  (up to date)\nnull_resource.chef_server_config (remote-exec):   * execute[restart_postgresql_log_service] action run\n \nnull_resource.chef_server_config (remote-exec):     - execute /opt/opscode/embedded/bin/sv restart /opt/opscode/sv/postgresql/log\nnull_resource.chef_server_config (remote-exec): Recipe: private-chef::oc_bifrost\nnull_resource.chef_server_config (remote-exec):   * runit_service[oc_bifrost] action restart\nnull_resource.chef_server_config (remote-exec):  (up to date)\nnull_resource.chef_server_config (remote-exec):   * execute[restart_oc_bifrost_log_service] action run\n \nnull_resource.chef_server_config (remote-exec):     - execute /opt/opscode/embedded/bin/sv restart /opt/opscode/sv/oc_bifrost/log\nnull_resource.chef_server_config (remote-exec): Recipe: private-chef::oc_id\nnull_resource.chef_server_config (remote-exec):   * runit_service[oc_id] action restart\nnull_resource.chef_server_config (remote-exec):  (up to date)\nnull_resource.chef_server_config (remote-exec):   * execute[restart_oc_id_log_service] action run\n \nnull_resource.chef_server_config (remote-exec):     - execute /opt/opscode/embedded/bin/sv restart /opt/opscode/sv/oc_id/log\nnull_resource.chef_server_config (remote-exec): Recipe: private-chef::nginx\nnull_resource.chef_server_config (remote-exec):   * runit_service[nginx] action restart\nnull_resource.chef_server_config: Still creating... [1m50s elapsed]\nnull_resource.chef_server_config: Still creating... [2m0s elapsed]\nnull_resource.chef_server_config: Still creating... [2m10s elapsed]\nnull_resource.chef_server_config: Still creating... [2m20s elapsed]\n \nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):     ================================================================================\nnull_resource.chef_server_config (remote-exec):     Error executing action `restart` on resource \'runit_service[nginx]\'\nnull_resource.chef_server_config (remote-exec):     ================================================================================\n \nnull_resource.chef_server_config (remote-exec):     Mixlib::ShellOut::ShellCommandFailed\nnull_resource.chef_server_config (remote-exec):     ------------------------------------\nnull_resource.chef_server_config (remote-exec):     Expected process to exit with [0], but received \'1\'\nnull_resource.chef_server_config (remote-exec):     ---- Begin output of /opt/opscode/embedded/bin/sv restart /opt/opscode/service/nginx ----\nnull_resource.chef_server_config (remote-exec):     STDOUT: fail: /opt/opscode/service/nginx: unable to change to service directory: file does not exist\nnull_resource.chef_server_config (remote-exec):     STDERR:\nnull_resource.chef_server_config (remote-exec):     ---- End output of /opt/opscode/embedded/bin/sv restart /opt/opscode/service/nginx ----\nnull_resource.chef_server_config (remote-exec):     Ran /opt/opscode/embedded/bin/sv restart /opt/opscode/service/nginx returned 1\n \nnull_resource.chef_server_config (remote-exec):     Cookbook Trace:\nnull_resource.chef_server_config (remote-exec):     ---------------\nnull_resource.chef_server_config (remote-exec):     /var/opt/opscode/local-mode-cache/cookbooks/runit/libraries/helpers.rb:174:in `tap\'\nnull_resource.chef_server_config (remote-exec):     /var/opt/opscode/local-mode-cache/cookbooks/runit/libraries/helpers.rb:174:in `safe_sv_shellout!\'\nnull_resource.chef_server_config (remote-exec):     /var/opt/opscode/local-mode-cache/cookbooks/runit/libraries/helpers.rb:202:in `restart_service\'\nnull_resource.chef_server_config (remote-exec):     /var/opt/opscode/local-mode-cache/cookbooks/runit/libraries/provider_runit_service.rb:330:in `block in <class:RunitService>\'\n \nnull_resource.chef_server_config (remote-exec):     Resource Declaration:\nnull_resource.chef_server_config (remote-exec):     ---------------------\nnull_resource.chef_server_config (remote-exec):     # In /var/opt/opscode/local-mode-cache/cookbooks/enterprise/definitions/component_runit_service.rb\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):      37:   runit_service component do\nnull_resource.chef_server_config (remote-exec):      38:     action :enable\nnull_resource.chef_server_config (remote-exec):      39:     retries 20\nnull_resource.chef_server_config (remote-exec):      40:     control params[:control] if params[:control]\nnull_resource.chef_server_config (remote-exec):      41:     options(\nnull_resource.chef_server_config (remote-exec):      42:       log_directory: log_directory\nnull_resource.chef_server_config (remote-exec):      43:     )\nnull_resource.chef_server_config (remote-exec):      44:     params[:runit_attributes].each do |attr_name, attr_value|\nnull_resource.chef_server_config (remote-exec):      45:       send(attr_name.to_sym, attr_value)\nnull_resource.chef_server_config (remote-exec):      46:     end\nnull_resource.chef_server_config (remote-exec):      47:   end\nnull_resource.chef_server_config (remote-exec):      48:\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):     Compiled Resource:\nnull_resource.chef_server_config (remote-exec):     ------------------\nnull_resource.chef_server_config (remote-exec):     # Declared in /var/opt/opscode/local-mode-cache/cookbooks/enterprise/definitions/component_runit_service.rb:37:in `block in from_file\'\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):     runit_service(\"nginx\") do\nnull_resource.chef_server_config (remote-exec):       params {:package=>\"private_chef\", :log_directory=>nil, :svlogd_size=>nil, :svlogd_num=>nil, :ha=>nil, :control=>nil, :runit_attributes=>{}, :action=>:enable, :name=>\"nginx\"}\nnull_resource.chef_server_config (remote-exec):       provider Chef::Provider::RunitService\nnull_resource.chef_server_config (remote-exec):       action [:enable]\nnull_resource.chef_server_config (remote-exec):       supports {:restart=>true, :reload=>true, :status=>true}\nnull_resource.chef_server_config (remote-exec):       retries 20\nnull_resource.chef_server_config (remote-exec):       retry_delay 2\nnull_resource.chef_server_config (remote-exec):       default_guard_interpreter :default\nnull_resource.chef_server_config (remote-exec):       service_name \"nginx\"\nnull_resource.chef_server_config (remote-exec):       enabled false\nnull_resource.chef_server_config (remote-exec):       running false\nnull_resource.chef_server_config (remote-exec):       masked nil\nnull_resource.chef_server_config (remote-exec):       pattern \"nginx\"\nnull_resource.chef_server_config (remote-exec):       status_command \"/opt/opscode/embedded/bin/sv status /opt/opscode/service\"\nnull_resource.chef_server_config (remote-exec):       sv_bin \"/opt/opscode/embedded/bin/sv\"\nnull_resource.chef_server_config (remote-exec):       sv_dir \"/opt/opscode/sv\"\nnull_resource.chef_server_config (remote-exec):       service_dir \"/opt/opscode/service\"\nnull_resource.chef_server_config (remote-exec):       lsb_init_dir \"/opt/opscode/init\"\nnull_resource.chef_server_config (remote-exec):       options {:log_directory=>\"/var/log/opscode/nginx\"}\nnull_resource.chef_server_config (remote-exec):       log true\nnull_resource.chef_server_config (remote-exec):       restart_on_update true\nnull_resource.chef_server_config (remote-exec):       run_template_name \"nginx\"\nnull_resource.chef_server_config (remote-exec):       log_template_name \"nginx\"\nnull_resource.chef_server_config (remote-exec):       check_script_template_name \"nginx\"\nnull_resource.chef_server_config (remote-exec):       finish_script_template_name \"nginx\"\nnull_resource.chef_server_config (remote-exec):       sv_templates true\nnull_resource.chef_server_config (remote-exec):       log_dir \"/var/log/nginx\"\nnull_resource.chef_server_config (remote-exec):       service_mirror # Declared in\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):     service(\"nginx\") do\nnull_resource.chef_server_config (remote-exec):       provider Chef::Provider::Service::Simple\nnull_resource.chef_server_config (remote-exec):       action [:nothing]\nnull_resource.chef_server_config (remote-exec):       supports {:restart=>true, :reload=>true, :status=>true}\nnull_resource.chef_server_config (remote-exec):       retries 0\nnull_resource.chef_server_config (remote-exec):       retry_delay 2\nnull_resource.chef_server_config (remote-exec):       default_guard_interpreter :default\nnull_resource.chef_server_config (remote-exec):       service_name \"nginx\"\nnull_resource.chef_server_config (remote-exec):       enabled nil\nnull_resource.chef_server_config (remote-exec):       running nil\nnull_resource.chef_server_config (remote-exec):       masked nil\nnull_resource.chef_server_config (remote-exec):       pattern \"nginx\"\nnull_resource.chef_server_config (remote-exec):       start_command \"/opt/opscode/embedded/bin/sv start /opt/opscode/service/nginx\"\nnull_resource.chef_server_config (remote-exec):       stop_command \"/opt/opscode/embedded/bin/sv stop /opt/opscode/service/nginx\"\nnull_resource.chef_server_config (remote-exec):       status_command \"/opt/opscode/embedded/bin/sv status /opt/opscode/service/nginx\"\nnull_resource.chef_server_config (remote-exec):       restart_command \"/opt/opscode/embedded/bin/sv restart /opt/opscode/service/nginx\"\nnull_resource.chef_server_config (remote-exec):     end\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):       declared_type :runit_service\nnull_resource.chef_server_config (remote-exec):       cookbook_name \"private-chef\"\nnull_resource.chef_server_config (remote-exec):       recipe_name \"nginx\"\nnull_resource.chef_server_config (remote-exec):     end\nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec):     Platform:\nnull_resource.chef_server_config (remote-exec):     ---------\nnull_resource.chef_server_config (remote-exec):     x86_64-linux\n \nnull_resource.chef_server_config (remote-exec):\nnull_resource.chef_server_config (remote-exec): Running handlers:\nnull_resource.chef_server_config (remote-exec): Running handlers complete\nnull_resource.chef_server_config (remote-exec): Chef Client failed. 144 resources updated in 01 minutes 36 seconds\nnull_resource.chef_server_config (remote-exec): [2022-02-20T16:07:50+00:00] FATAL: Stacktrace dumped to /var/opt/opscode/local-mode-cache/chef-stacktrace.out\nnull_resource.chef_server_config (remote-exec): [2022-02-20T16:07:50+00:00] FATAL: Please provide the contents of the stacktrace.out file if you file a bug report\nnull_resource.chef_server_config (remote-exec): [2022-02-20T16:07:50+00:00] FATAL: Chef::Exceptions::MultipleFailures: Multiple failures occurred:\nnull_resource.chef_server_config (remote-exec): * Net::HTTPServerException occurred in chef run: elasticsearch_index[chef] (private-chef::opscode-solr4-external line 23) had an error: Net::HTTPServerException: 406 \"Not Acceptable\"\nnull_resource.chef_server_config (remote-exec): * Mixlib::ShellOut::ShellCommandFailed occurred in delayed notification: runit_service[nginx] (private-chef::nginx line 37) had an error: Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received \'1\'\nnull_resource.chef_server_config (remote-exec): ---- Begin output of /opt/opscode/embedded/bin/sv restart /opt/opscode/service/nginx ----\nnull_resource.chef_server_config (remote-exec): STDOUT: fail: /opt/opscode/service/nginx: unable to change to service directory: file does not exist\nnull_resource.chef_server_config (remote-exec): STDERR:\nnull_resource.chef_server_config (remote-exec): ---- End output of /opt/opscode/embedded/bin/sv restart /opt/opscode/service/nginx ----\nnull_resource.chef_server_config (remote-exec): Ran /opt/opscode/embedded/bin/sv restart /opt/opscode/service/nginx returned 1\n \n╷\n│ Error: remote-exec provisioner error\n│\n│   with null_resource.chef_server_config,\n│   on main.tf line 106, in resource \"null_resource\" \"chef_server_config\":\n│  106:   provisioner \"remote-exec\" {\n│\n│ error executing \"/tmp/terraform_381287229.sh\": Process exited with status 1\n╵\n \n  END SCENARIO\n \n      Workspace: 1069-external-elasticsearch-ipv4-ubuntu-18.04\n      Scenario: external-elasticsearch\n        Status: FAIL",
 _Context,
-"needs investigation",
+"needs investigation.  seems to occur on initial install, not upgrade. older server (12.17.15) not compatible with latest external elastic search 6.8.23 ('private-chef' found in the error dump, vs 'infra-server'.). resolution: 1) add external search scenario, 2) last stable -> release you are releasing. not release blocker if it passes on step 2 <---",
 unspecified,
-["14.5.29"],
-["12.17.15 -> 14.0.58", "12.17.15 -> 14.13.7+20220211145353"],
+["14.5.29", "14.13.42"],
+["12.17.15 -> 14.0.58", "12.17.15 -> 14.13.7+20220211145353", "12.17.15 -> 14.13.42"],
 [
 "https://buildkite.com/chef/chef-umbrella-master-chef-server/builds/520",
-"https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069#0b819075-f5fc-419c-a5df-7aef44b627a8/233"
+"https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069#0b819075-f5fc-419c-a5df-7aef44b627a8/233",
+"https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1091#55e8e16a-b969-4ffb-8219-73252557a2c1/248"
 ],
 ["external-elasticsearch-ipv4-ubuntu-18.04"]
 ).
@@ -332,10 +334,16 @@ failure(
 _Context,
 unspecified,
 unspecified,
-[],
-["14.12.21 -> 14.13.7+20220211145353"],
-["https://buildkite.com/chef/chef-umbrella-main-chef-server-full/builds/111#3fba82c6-2550-4005-a570-7e88b51eaa21"],
-["external-postgresql-ipv4-amazon-2"]
+["14.13.42"],
+["14.12.21 -> 14.13.7+20220211145353", "14.12.21 -> 14.13.42"],
+[
+"https://buildkite.com/chef/chef-umbrella-main-chef-server-full/builds/111#3fba82c6-2550-4005-a570-7e88b51eaa21",
+"https://buildkite.com/chef/chef-umbrella-main-chef-server-full/builds/123#96a47ea0-990e-4232-ad7d-72ee747ef9ec"
+],
+[
+"external-postgresql-ipv4-amazon-2",
+"external-elasticsearch-ipv4-ubuntu-18.04"
+]
 ).
 
 failure(
@@ -345,9 +353,9 @@ _Context,
 unspecified,
 unspecified,
 [],
-["12.17.15 -> 14.12.21", "12.17.15 -> 14.13.7+20220211145353"],
+["12.17.15 -> 14.12.21", "12.17.15 -> 14.13.7+20220211145353", "12.17.15 -> 14.13.42", "13.2.0 -> 14.13.42", "14.12.21 -> 14.13.42"],
 ["https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1023", "https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069"],
-["chef-backend-ipv4-rhel-8", "chef-backend-ipv4-ubuntu-18.04"]
+["chef-backend-ipv4-rhel-7", "chef-backend-ipv4-rhel-8", "chef-backend-ipv4-ubuntu-16.04", "chef-backend-ipv4-ubuntu-18.04", "chef-backend-ipv4-ubuntu-20.04"]
 ).
 
 failure(
@@ -381,8 +389,11 @@ _Context,
 unspecified,
 unspecified,
 [],
-["12.17.15 -> 14.13.7+20220211145353"],
-["https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069#645ee343-2b28-4d1f-a32d-725be805f762"],
+["12.17.15 -> 14.13.7+20220211145353", "12.17.15 -> 14.13.42"],
+[
+"https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1069#645ee343-2b28-4d1f-a32d-725be805f762",
+"https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1091#bf57c26b-b734-403f-a83b-786bdc5b56cc"
+],
 ["external-postgresql-ipv6-rhel-8"]
 ).
 
@@ -410,13 +421,49 @@ unspecified,
 ["external-postgresql-ipv4-amazon-2"]
 ).
 
+failure(
+28,
+"module.chef_server.local_file.connection_info[0]: Creating...\nmodule.chef_server.local_file.connection_info[0]: Creation complete after 0s [id=a6836c3c108b1ed34a88bd57915176791ea78ebe]\n╷\n│ Error: creating PostgreSQL Server \"1091-external-postgresql-rhel-8-releng-e2e-test\" (Resource Group \"1091-releng-e2e-test\"): postgresql.ServersClient#Create: Failure sending request: StatusCode=0 -- Original Error: Code=\"ProvisioningDisabled\" Message=\"This subscription is restricted from provisioning PostgreSQL servers in this region. Please choose a different region or open a support request with service and subscription limits (quotas) issue type.\"\n│\n│   with azurerm_postgresql_server.default,\n│   on main.tf line 28, in resource \"azurerm_postgresql_server\" \"default\":\n│   28: resource \"azurerm_postgresql_server\" \"default\" {\n│\n╵\n \n  END SCENARIO\n \n      Workspace: 1091-external-postgresql-ipv4-rhel-8\n      Scenario: external-postgresql\n        Status: FAIL",
+_Context,
+unspecified,
+unspecified,
+["14.13.42"],
+["12.17.15 -> 14.13.42"],
+["https://buildkite.com/chef/chef-umbrella-main-chef-server/builds/1091#12105e48-da04-474d-813d-4591fccf480c"],
+["azure-postgresql-rhel-8"]
+).
+
+failure(
+29,
+"BEGIN SCENARIO\n \n      Workspace: 122-external-postgresql-ipv6-amazon-2\n      Scenario: external-postgresql\n      Platform: amazon-2\n          IPv6: true\n        Install: 13.2.0\n    Install URL:\n        Upgrade: 14.13.42\n    Upgrade URL: https://packages.chef.io/files/unstable/chef-server/14.13.42/amazon/2/chef-server-core-14.13.42-1.el7.x86_64.rpm\n        Backend: 3.0.0\n    Backend URL: https://packages.chef.io/files/stable/chef-backend/3.0.0/amazon/2/chef-backend-3.0.0-1.el7.x86_64.rpm\n         Manage: 3.3.19\n     Manage URL:\n \n╷\n│ Error: Error in function call\n│\n│   on main.tf line 48, in locals:\n│   48:   install_version = regex(\"\\\\d+\\\\.\\\\d+\", var.install_version_url)\n│     ├────────────────\n│     │ var.install_version_url is \"\"\n│\n│ Call to function \"regex\" failed: pattern did not match any part of the given string.\n╵\n \n  END SCENARIO\n \n      Workspace: 122-external-postgresql-ipv6-amazon-2\n      Scenario: external-postgresql\n        Status: FAIL",
+_Context,
+unspecified,
+unspecified,
+["14.13.42"],
+["12.17.15 -> 14.13.42"],
+["https://buildkite.com/chef/chef-umbrella-main-chef-server-full/builds/122#a682cb69-bcb5-44de-9994-a2df80aefa3e"],
+["external-postgresql-ipv4-amazon-2", "external-postgresql-ipv6-amazon-2"]
+).
+
+failure(
+30,
+"WARNING! Your password will be stored unencrypted in /tmp/tmp.eEwavmbGHl/config.json.\nConfigure a credential helper to remove this warning. See\nhttps://docs.docker.com/engine/reference/commandline/login/#credentials-store\n \nLogin Succeeded\nFixing permissions for \'default-chef-i-07b6a0ac987092303-3/chef/chef-umbrella-main-chef-server-full\'...\n \nError: All attempts fail:\n#1: failed to configure accounts: get aws sts secret: Error making API request.\n \nURL: GET https://vault.es.chef.co/v1/account/dynamic/aws/chef-cd/sts/default\nCode: 400. Errors:\n \n* error performing token check: failed to persist lease entry: cannot write to readonly storage\n2022/03/01 02:39:34 All attempts fail:\n#1: failed to configure accounts: get aws sts secret: Error making API request.\n \nURL: GET https://vault.es.chef.co/v1/account/dynamic/aws/chef-cd/sts/default\nCode: 400. Errors:\n \n* error performing token check: failed to persist lease entry: cannot write to readonly storage",
+_Context,
+unspecified,
+unspecified,
+["14.13.42"],
+["14.12.21 -> 14.13.42"],
+["https://buildkite.com/chef/chef-umbrella-main-chef-server-full/builds/123#9e055f2a-b846-4da0-a39b-1020a0d8b105"],
+["tiered-upgrade-ipv6-rhel-8"]
+).
+
 % ------------------------------------------------------------------------------
 % to enter a failure, copy/paste a template record (below), uncomment, and fill
 % in the blanks. escape any strings with https://onlinetexttools.com/escape-text .
 % ------------------------------------------------------------------------------
 %failure(
 %ID,                    % integer, unique ID,
-%Failure,               % string,
+%Failure,               % string (escaped),
 %_Context,              % string,
 %Reason,                % example: unspecified/"fixed on retry"/"kernel too old"/etc,
 %ReleaseBlocking,       % example: unknown/unspecified/yes/no,
